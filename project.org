@@ -1,0 +1,30 @@
+#+TITLE: ALRO Project
+
+* Idea
+Evaluate an algorithm based on certain characteristics.
+** Pitch
+Self-singable algorithm rating.
+
+
+* ALRO score
++ 0 - 10 scale
+** Properties
++ Algorithm efficiency (execution time)
++ Uniqueness
+  + Evaluation based on how many other algorithms with matching tags exist
++ Casing Performance
+
+* Functionality
+
+** Generating
++ Create .ALRO file and .alro directory
+** Scoring Setup
++ Create inputs
+
+
+** Efficiency Measure
+1. Add runtime hooks to all key algorithms
+2. Add evaluator to the end of the program
+4. Run full Program
+   1. At the end of program
+      Evaluate run times and save them to .alro
