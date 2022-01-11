@@ -27,4 +27,4 @@ Self-singable algorithm rating.
 2. Add evaluator to the end of the program
 4. Run full Program
    1. At the end of program
-      Evaluate run times and save them to .alro
+      Evaluate run times and save them to .alro/keyalgsrun

@@ -6,6 +6,8 @@ import services.FileReader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,6 +17,7 @@ import java.util.Scanner;
 public class ALRO {
 
 
+    String dotalro;
     String[] algorithms;
     double[] algorithmRuntimes;
     public static ALRO register(String alroConfig) {
@@ -25,7 +28,8 @@ public class ALRO {
         String alrofilecontents = FileReader.readContents(file);
         Gson gson = new Gson();
         ALROfile alrOfile = gson.fromJson(alrofilecontents, ALROfile.class);
-        Path path2 = Paths.get(file.getAbsoluteFile().getParent()+"/.alro/keyalgs");
+        alro.dotalro = file.getAbsoluteFile().getParent()+"/.alro";
+        Path path2 = Paths.get(alro.dotalro+"/keyalgs");
         System.out.println(path2);
         exists = Files.exists(path2);
         if (exists) alro.setAlgorithms(FileReader.readContents(path2.toFile()).split("\n"));
@@ -36,8 +40,24 @@ public class ALRO {
     public void savePerformance() {
         StringBuilder sb = new StringBuilder();
         for(int i = 0 ; i < algorithms.length; i += 1) {
-            String rep = algorithms[i]+"\t\t"+algorithmRuntimes[i]+"ms";
+            String rep = algorithms[i]+":"+algorithmRuntimes[i];
             sb.append(rep+"\n");
+        }
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(dotalro+"/keyalgsrun");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer.write(sb.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         System.out.println(sb.toString());
     }
